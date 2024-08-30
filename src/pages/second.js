@@ -53,8 +53,8 @@ const SecondPage = () => {
             })}
           </div>
         </div>
-        <div onClick={resetScore}>
-          <Reset />
+        <div>
+          <Reset onClick={resetScore} />
         </div>
       </div>
     </div>
