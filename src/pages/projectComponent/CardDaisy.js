@@ -1,5 +1,6 @@
 export const CardDaisy = (props) => {
   const { title, image } = props;
+
   return (
     <div className="card w-[289px] h-[328px] bg-base-100 image-full shadow-xl">
       <figure>

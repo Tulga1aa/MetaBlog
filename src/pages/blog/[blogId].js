@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import parse from "html-react-parser";
+import Markdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import { Header } from "../projectComponent/Header";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -19,10 +21,25 @@ const BlogPage = () => {
     return <div>loading</div>;
   }
 
-  const body_html = blog?.body_html;
+  const body_markdown = blog?.body_markdown;
+  console.log(blog);
+  const title = blog?.title;
+  const description = blog?.description;
+  const image = blog?.cover_image;
+  const date = blog?.published_at;
+
   return (
-    <div className="container max-w-[1000px] mx-auto">{parse(body_html)}</div>
+    <div className="max-w-[1100px] mx-auto">
+      <div className="container max-w-[700px] mx-auto">
+        <img src={image} />
+        <h1 className="font-bold text-3xl">{title}</h1>
+        <div>{description}</div>
+        <div>{date}</div>
+        <div className="prose ">
+          <Markdown rehypePlugins={[rehypeHighlight]}>{body_markdown}</Markdown>
+        </div>
+      </div>
+    </div>
   );
 };
-
 export default BlogPage;

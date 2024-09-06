@@ -6,6 +6,7 @@ import { Carousel } from "./projectComponent/Carousel";
 import { Footer } from "./projectComponent/Footer";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Contact } from "./Contact";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -14,6 +15,7 @@ const MainPage = () => {
 
   const url = "https://dev.to/api/articles";
   const { data: blogdata, error, isLoading } = useSWR(url, fetcher);
+  // const { List, setList } = useState;
 
   if (isLoading) {
     return <p>...loading</p>;
@@ -25,12 +27,12 @@ const MainPage = () => {
 
   return (
     <div className="max-w-[1200px] mx-auto">
-      <Header />
+      {/* <Header /> */}
       <div className="carousel w-[1200px] h-[600px]">
         {blogdata.map((sel, index) => {
           return (
             <Carousel
-              index={index}
+              index={sel.id}
               key={sel.id}
               image={sel.cover_image}
               title={sel.title}
@@ -72,7 +74,6 @@ const MainPage = () => {
           );
         })}
       </div>
-      <Footer />
     </div>
   );
 };
