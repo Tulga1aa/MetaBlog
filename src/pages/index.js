@@ -74,7 +74,7 @@ const MainPage = () => {
 
   return (
     <div className="max-w-[1200px] mx-auto">
-      {/* <div className="w-[1200px] h-[600px]">
+      <div className="w-[1200px] h-[600px]">
         <Carousel
           id={selectedBlog.id}
           key={selectedBlog.id}
@@ -102,7 +102,7 @@ const MainPage = () => {
             </Link>
           );
         })}
-      </div> */}
+      </div>
       <div className="font-bold w-[1200px] mx-auto mb-10 mt-10 text-2xl">
         All Blog Post
       </div>
