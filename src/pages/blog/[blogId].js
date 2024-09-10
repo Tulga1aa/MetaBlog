@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
-import { Header } from "../projectComponent/Header";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -22,7 +21,7 @@ const BlogPage = () => {
   }
 
   const body_markdown = blog?.body_markdown;
-  console.log(blog);
+
   const title = blog?.title;
   const description = blog?.description;
   const image = blog?.cover_image;

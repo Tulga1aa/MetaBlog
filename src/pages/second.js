@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { PlayerScore } from "../pages/component/PlayerScore";
-import { Reset } from "./component/Reset";
+import { PlayerScore } from "../components/component/PlayerScore";
+import { Reset } from "../components/component/Reset";
 
 const players = [
   {

@@ -15,8 +15,8 @@ export const Footer = () => {
             <p className="mt-4">Email : info@jstemplate.net</p>
             <p>Phone : 880 123 456 789</p>
           </div>
-          <div className="mt-12">
-            <Link href="/">Home</Link>
+          <div className="mt-12 gap-5">
+            <Link href="/Newproject">Home</Link>
             <Link href="/">Blog</Link>
             <Link href="/Contact">Contact</Link>
           </div>

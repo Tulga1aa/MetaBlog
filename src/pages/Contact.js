@@ -47,7 +47,7 @@ export const Contact = () => {
         </div>
         <div>
           <textarea
-            className="w-[500px] h-[150px] border-[2px] mx-[15px] my-[10px]"
+            className="w-[500px] h-[1use50px] border-[2px] mx-[15px] my-[10px]"
             placeholder="Write a message"
           />
           <button className="btn btn-active btn-primary mx-[15px] my-[10px]">
