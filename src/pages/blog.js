@@ -5,14 +5,10 @@ import { Carousel } from "@/components/component/Carousel";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { useContext, useState } from "react";
-// import { ThemeContext } from "@/components/component/ThemeContext";
-
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const MainPage = () => {
   const router = useRouter();
-  const { blogdataId } = router.query;
 
   const url = "https://dev.to/api/articles";
   const { data: blogdata, error, isLoading } = useSWR(url, fetcher);
@@ -63,10 +59,6 @@ const MainPage = () => {
   };
 
   const filteredByTagBlogs = [...blogdata].filter((blog) => {
-    if (selectedTag === "") {
-      return true;
-    }
-
     if (blog.tag_list.includes(selectedTag)) {
       return true;
     } else {
@@ -106,14 +98,14 @@ const MainPage = () => {
         All Blog Post
       </div>
       <div className="flex flex-wrap gap-2 container font-bold mx-auto">
-        {blogTags.map((tag) => {
+        {filteredByTagBlogs.map((tag) => {
           return <div onClick={() => handleSelectTag(tag)}>{tag}</div>;
         })}
 
         <button className="flex font-bold">View All</button>
       </div>
       <div className="max-w-[1200px] grid grid-cols-3 mx-auto">
-        {filteredByTagBlogs.map((blog) => {
+        {blogdata.map((blog) => {
           return (
             <Card
               image={blog.cover_image}
@@ -134,14 +126,3 @@ const MainPage = () => {
   );
 };
 export default MainPage;
-
-// export default function Page() {
-//   const light = useContext(ThemeContext);
-
-//   console.log(light);
-//   return (
-//     <div>
-//       <button onClick={() => setDark("dark")}>summer</button>
-//     </div>
-//   );
-// }

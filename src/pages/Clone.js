@@ -1,24 +1,26 @@
 import useSWR from "swr";
-import { Card } from "@/components/component/Card";
+import { Card } from "../components/component/Card";
 import { CardDaisy } from "../components/component/CardDaisy";
 import { Carousel } from "@/components/component/Carousel";
 import { useRouter } from "next/router";
 import Link from "next/link";
-
-import { useContext, useState } from "react";
-// import { ThemeContext } from "@/components/component/ThemeContext";
+import { useState } from "react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const MainPage = () => {
   const router = useRouter();
-  const { blogdataId } = router.query;
 
   const url = "https://dev.to/api/articles";
   const { data: blogdata, error, isLoading } = useSWR(url, fetcher);
 
   const [selectedBolgindex, setSelectedBolgindex] = useState(0);
   const [selectedTag, setSelectedTag] = useState("");
+
+  const [count, setCount] = useState(9);
+  const handle = () => {
+    setCount(count + 6);
+  };
 
   if (isLoading) {
     return <p>...loading</p>;
@@ -63,10 +65,6 @@ const MainPage = () => {
   };
 
   const filteredByTagBlogs = [...blogdata].filter((blog) => {
-    if (selectedTag === "") {
-      return true;
-    }
-
     if (blog.tag_list.includes(selectedTag)) {
       return true;
     } else {
@@ -87,18 +85,21 @@ const MainPage = () => {
           handlePrev={handlePrevCarousel}
         />
       </div>
+
       <div className="font-bold w-[1200px] mx-auto mb-8 mt-12 text-2xl">
         Trending
       </div>
       <div className="flex gap-[10px]">
         {carouselBlogs.map((card) => {
           return (
-            <CardDaisy
-              key={card.id}
-              image={card.cover_image}
-              title={card.title}
-              date={card.published_at}
-            />
+            <Link href={`blog/${card.id}`} key={card.id}>
+              <CardDaisy
+                key={card.id}
+                image={card.cover_image}
+                title={card.title}
+                date={card.published_at}
+              />
+            </Link>
           );
         })}
       </div>
@@ -106,27 +107,31 @@ const MainPage = () => {
         All Blog Post
       </div>
       <div className="flex flex-wrap gap-2 container font-bold mx-auto">
-        {blogTags.map((tag) => {
+        {filteredByTagBlogs.map((tag) => {
           return <div onClick={() => handleSelectTag(tag)}>{tag}</div>;
         })}
 
         <button className="flex font-bold">View All</button>
       </div>
       <div className="max-w-[1200px] grid grid-cols-3 mx-auto">
-        {filteredByTagBlogs.map((blog) => {
+        {blogdata.map((blog) => {
           return (
-            <Card
-              image={blog.cover_image}
-              title={blog.title}
-              date={blog.published_at}
-              tags={blog.tags}
-            />
+            <Link href={`blog/${blog.id}`} key={blog.id}>
+              <Card
+                image={blog.cover_image}
+                title={blog.title}
+                date={blog.published_at}
+                tags={blog.tags}
+              />
+            </Link>
           );
         })}
-        <Card />
       </div>
       <div className="flex justify-center ">
-        <button className="bg-white border-2 w-[120px] h-[48px]">
+        <button
+          onClick={handle}
+          className="bg-white border-2 w-[120px] h-[48px]"
+        >
           LoadMore
         </button>
       </div>
@@ -134,14 +139,3 @@ const MainPage = () => {
   );
 };
 export default MainPage;
-
-// export default function Page() {
-//   const light = useContext(ThemeContext);
-
-//   console.log(light);
-//   return (
-//     <div>
-//       <button onClick={() => setDark("dark")}>summer</button>
-//     </div>
-//   );
-// }

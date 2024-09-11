@@ -1,13 +1,16 @@
 import "@/styles/globals.css";
-import { Header } from "../components/projectComponent/Header";
-import { Footer } from "../components/projectComponent/Footer";
+import { Header } from "../components/component/Header";
+import { Footer } from "../components/component/Footer";
+import { ThemeContextProvider } from "@/components/component/ThemeContext";
 
 export default function App({ Component, pageProps }) {
   return (
     <div>
-      <Header />
-      <Component {...pageProps} />;
-      <Footer />
+      <ThemeContextProvider>
+        <Header />
+        <Component {...pageProps} />;
+        <Footer />
+      </ThemeContextProvider>
     </div>
   );
 }

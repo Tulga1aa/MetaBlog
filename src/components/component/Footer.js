@@ -16,9 +16,15 @@ export const Footer = () => {
             <p>Phone : 880 123 456 789</p>
           </div>
           <div className="mt-12 gap-5">
-            <Link href="/Newproject">Home</Link>
-            <Link href="/">Blog</Link>
-            <Link href="/Contact">Contact</Link>
+            <Link href="/Newproject">
+              <p>Home</p>
+            </Link>
+            <Link href="/">
+              <p>Blog</p>
+            </Link>
+            <Link href="/Contact">
+              <p>Contact</p>
+            </Link>
           </div>
           <img className="mt-6 w-[140px] h-[50px]" src="/FooterLogo.svg" />
         </div>

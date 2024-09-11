@@ -3,7 +3,7 @@ import Link from "next/link";
 export const Header = () => {
   return (
     <div className="flex justify-around w-[1200px] h-[150px] mx-auto">
-      <Link href="/Newproject">
+      <Link href="/index">
         <img className="w-[100px] h-[50px] mt-3" src="/header.svg" />
       </Link>
       <div className="flex gap-4 mt-6 justify-center">
