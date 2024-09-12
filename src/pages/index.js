@@ -20,7 +20,7 @@ const MainPage = () => {
   const [selectedBolgindex, setSelectedBolgindex] = useState(0);
   const [selectedTag, setSelectedTag] = useState("");
   const [numberOfTags, setNumberOfTags] = useState(4);
-  const [nineBlogs, setNineBlogs] = useState(9);
+  const [viewBlogsCount, setViewBlogsCount] = useState(9);
 
   if (isLoading) {
     return <p>...loading</p>;
@@ -41,7 +41,12 @@ const MainPage = () => {
   });
   const length = blogTagsSliced.length;
   const blogTags = blogTagsSliced.slice(0, numberOfTags);
+
   const viewAll = () => {
+    if (numberOfTags > 4) {
+      setNumberOfTags(4);
+      return;
+    }
     setNumberOfTags(length);
   };
 
@@ -80,6 +85,12 @@ const MainPage = () => {
     }
   });
 
+  const slicedblogs = filteredByTagBlogs.slice(0, viewBlogsCount);
+
+  const loadMore = () => {
+    setViewBlogsCount((prev) => prev + 1);
+    setViewBlogsCount((prev) => prev + 1);
+  };
   return (
     <div className="max-w-[1200px] mx-auto">
       <div className="w-[1200px] h-[600px]">
@@ -121,7 +132,7 @@ const MainPage = () => {
         </button>
       </div>
       <div className="max-w-[1200px] grid grid-cols-3 mx-auto">
-        {filteredByTagBlogs.map((blog) => {
+        {slicedblogs.map((blog) => {
           return (
             <Card
               image={blog.cover_image}
@@ -134,7 +145,10 @@ const MainPage = () => {
         <Card />
       </div>
       <div className="flex justify-center ">
-        <button className="bg-white border-2 w-[120px] h-[48px]">
+        <button
+          onClick={loadMore}
+          className="bg-white border-2 w-[120px] h-[48px]"
+        >
           LoadMore
         </button>
       </div>
@@ -142,14 +156,3 @@ const MainPage = () => {
   );
 };
 export default MainPage;
-
-// export default function Page() {
-//   const light = useContext(ThemeContext);
-
-//   console.log(light);
-//   return (
-//     <div>
-//       <button onClick={() => setDark("dark")}>summer</button>
-//     </div>
-//   );
-// }
