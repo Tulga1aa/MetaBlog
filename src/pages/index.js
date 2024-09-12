@@ -19,6 +19,8 @@ const MainPage = () => {
 
   const [selectedBolgindex, setSelectedBolgindex] = useState(0);
   const [selectedTag, setSelectedTag] = useState("");
+  const [numberOfTags, setNumberOfTags] = useState(4);
+  const [nineBlogs, setNineBlogs] = useState(9);
 
   if (isLoading) {
     return <p>...loading</p>;
@@ -27,20 +29,24 @@ const MainPage = () => {
   if (error) {
     return <p>...sorry error</p>;
   }
-  const blogTags = [];
+  const blogTagsSliced = [];
 
   blogdata.forEach((blog) => {
     blog.tag_list.forEach((tag) => {
-      if (blogTags.includes(tag)) {
+      if (blogTagsSliced.includes(tag)) {
         return;
       }
-      blogTags.push(tag);
+      blogTagsSliced.push(tag);
     });
   });
+  const length = blogTagsSliced.length;
+  const blogTags = blogTagsSliced.slice(0, numberOfTags);
+  const viewAll = () => {
+    setNumberOfTags(length);
+  };
 
   const carouselBlogs = [...blogdata].slice(0, 4);
   const carouselBlogsLastIndex = carouselBlogs.length - 1; // hamgin suulin blogin index
-
   const selectedBlog = carouselBlogs[selectedBolgindex];
 
   const handleNextCarousel = () => {
@@ -106,11 +112,13 @@ const MainPage = () => {
         All Blog Post
       </div>
       <div className="flex flex-wrap gap-2 container font-bold mx-auto">
+        All
         {blogTags.map((tag) => {
           return <div onClick={() => handleSelectTag(tag)}>{tag}</div>;
         })}
-
-        <button className="flex font-bold">View All</button>
+        <button onClick={viewAll} className="flex font-bold">
+          View All
+        </button>
       </div>
       <div className="max-w-[1200px] grid grid-cols-3 mx-auto">
         {filteredByTagBlogs.map((blog) => {
