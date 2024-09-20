@@ -1,3 +1,4 @@
+import React from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Markdown from "react-markdown";
@@ -13,32 +14,32 @@ const BlogPage = () => {
   const { data: blog, error, isLoading } = useSWR(url, fetcher);
 
   if (error) {
-    return <div>error</div>;
+    return <div>Error loading blog</div>;
   }
 
   if (isLoading) {
-    return <div>loading</div>;
+    return <div>Loading...</div>;
   }
 
-  const body_markdown = blog?.body_markdown;
+  if (!blog) {
+    return <div>No blog data available</div>;
+  }
 
-  const title = blog?.title;
-  const description = blog?.description;
-  const image = blog?.cover_image;
-  const date = blog?.published_at;
+  const { body_markdown, title, description, cover_image, published_at } = blog;
 
   return (
     <div className="max-w-[1100px] mx-auto">
       <div className="container max-w-[700px] mx-auto">
-        <img src={image} />
+        <img src={cover_image} alt={title} />
         <h1 className="font-bold text-3xl">{title}</h1>
         <div>{description}</div>
-        <div>{date}</div>
-        <div className="prose ">
+        <div>{published_at}</div>
+        <div className="prose">
           <Markdown rehypePlugins={[rehypeHighlight]}>{body_markdown}</Markdown>
         </div>
       </div>
     </div>
   );
 };
+
 export default BlogPage;

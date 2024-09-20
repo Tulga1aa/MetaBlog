@@ -13,7 +13,7 @@ export const Card = (props) => {
       <p>{formattedDate}</p>
       <p>{tags}</p>
     </div>
-    //{" "}
+    // //{" "}
     // </Link>
   );
 };
