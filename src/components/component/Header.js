@@ -7,8 +7,8 @@ export const Header = () => {
         <img className="w-[100px] h-[50px] mt-3" src="/header.svg" />
       </Link>
       <div className="flex gap-4 mt-6 justify-center">
-        <Link href="">Home</Link>
-        <Link href="/">Blog</Link>
+        <Link href=" / ">Home</Link>
+        <Link href="">Blog</Link>
         <Link href="/Contact">Contact</Link>
       </div>
       <div className="flex justify-center h-[30px] items-center container-fit mt-6">

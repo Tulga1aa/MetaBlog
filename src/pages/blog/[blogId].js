@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Markdown from "react-markdown";

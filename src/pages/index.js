@@ -67,7 +67,7 @@ const MainPage = () => {
   const slicedblogs = filteredByTagBlogs.slice(0, viewBlogsCount);
 
   const loadMore = () => {
-    setViewBlogsCount((prev) => prev + 3); // Adjust increment value if needed
+    setViewBlogsCount((prev) => prev + 3);
   };
 
   return (
@@ -104,14 +104,14 @@ const MainPage = () => {
       <div className="font-bold w-[1200px] mx-auto mb-10 mt-10 text-2xl">
         All Blog Posts
       </div>
-      <div className="flex flex-wrap gap-2 container font-bold mx-auto">
+      <div className="flex flex-wrap gap-2 container font-bold mx-auto cursor-pointer">
         <p onClick={viewAll}>All</p>
         {blogTags.map((tag) => (
           <div key={tag} onClick={() => handleSelectTag(tag)}>
             {tag}
           </div>
         ))}
-        <button onClick={viewAll} className="flex font-bold">
+        <button onClick={viewAll} className="flex font-bold cursor-pointer">
           View All
         </button>
       </div>
@@ -123,7 +123,7 @@ const MainPage = () => {
               image={blog.cover_image}
               title={blog.title}
               date={blog.published_at}
-              tags={blog.tag_list} // Assuming blog.tags should be blog.tag_list
+              tags={blog.tag_list}
             />
           </Link>
         ))}
@@ -140,24 +140,3 @@ const MainPage = () => {
   );
 };
 export default MainPage;
-
-// import { useState, useEffect } from "react";
-// import ReactDOM from "react-dom/client";
-
-// const Mybutton = () => {
-//   const [count, setCount] = useState(0);
-
-//   useEffect(() => {
-//     console.log(count);
-//   }, [count]);
-
-//   return (
-//     <div>
-//       <button onClick={() => setCount((count) => count + 1)}>
-//         You clicked{count} times!
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default Mybutton;

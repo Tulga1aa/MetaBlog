@@ -1,15 +1,14 @@
+"use client";
+
 import useSWR from "swr";
 import { Card } from "@/components/component/Card";
 import { CardDaisy } from "../components/component/CardDaisy";
 import { Carousel } from "@/components/component/Carousel";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { useState } from "react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const MainPage = () => {
-  const router = useRouter();
-
   const url = "https://dev.to/api/articles";
   const { data: blogdata, error, isLoading } = useSWR(url, fetcher);
 
